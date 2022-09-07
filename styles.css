@@ -1,0 +1,7 @@
+body {
+    background: lightgray;
+}
+
+.container {
+    max-width: 400px;
+}
