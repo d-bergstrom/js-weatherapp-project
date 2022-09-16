@@ -16,15 +16,16 @@ userInput.addEventListener('submit', event => {
     console.log(city);
 
     //Clear text entry after submission
-    // userInput.reset();
+    userInput.reset();
 
-    //Update the UI with the City and Weather Information
+    //Grab City and Weather Information Asynchronously
     getCity(city)
         .then(data => updateUI(data))
         .catch(err => console.log("Error:", err));
 
 });
 
+//Initiate API requests
 const getCity = async (city) => {
     //Wait until API calls are finished
     const cityInfo = await cityLocation(city);
@@ -40,14 +41,13 @@ const getCity = async (city) => {
 
 
 
-/* ===================== Update the UI Details ===================== */
+/* ===================== Update the UI DOM Details ===================== */
 const container = document.querySelector('.container');
 const card = document.querySelector('.card');
 const displayedInfo = document.querySelector('.displayed-info');
+const icon = document.querySelector(".weather-icon");
 
 const updateUI = data => {
-
-
 
     console.log("City Info:", data.cityInfo);
     console.log("Weather Info:", data.weatherInfo);
@@ -64,17 +64,27 @@ const updateUI = data => {
         <h3 class="mt-3 mb-0">${cityName}, ${stateName}</h5>
         <h5 class= "mt-0">${countryName}</h5>
         <h2 class="my-3">${weatherCondition}</h1>
-        <h1 class="my-3">${temp} &deg;F</h2>
+        <h1 class="my-3">${temp}&deg;F</h2>
     `;
+
+    //Update Weather Icon
+    const weatherIcon = `icons/${data.weatherInfo.WeatherIcon}.svg`;
+    icon.setAttribute('src', weatherIcon);
 
     if (card.classList.contains('d-none')) {
         card.classList.remove('d-none');
     }
 
-    if (!container.classList.contains('d-flex')) {
-        container.classList.add('d-flex');
-        document.querySelector('.app-title').classList.remove('mt-5');
-    }
 }
+
+// Close Button Behavior
+const clear = document.querySelector(".close-button");
+clear.addEventListener('click', event => {
+
+    if (!card.classList.contains('d-none')) {
+        card.classList.add('d-none');
+    }
+
+});
 
 /* ================================================================= */

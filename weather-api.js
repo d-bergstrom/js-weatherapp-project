@@ -4,7 +4,7 @@
 */
 
 
-const apiKey = "VbOs9jGyIQweBaPEv2hrVrkvsFrBYOGH";
+const apiKey = "XXvZPsPGcbAOTCJlwAG0QBHnyNI1S2RO";
 
 // Async function to make a promise in order to fetch API city location key
 const cityLocation = async (city) => {
@@ -23,7 +23,8 @@ const cityLocation = async (city) => {
     const data = await response.json();
 
     //Return the first data (best match)
-    // console.log("Location Key", data[0]);
+    //Return City Inforation Object
+    //console.log("Location Key", data[0]);
     return data[0];
 };
 
@@ -45,7 +46,8 @@ const cityWeather = async (id) => {
     const data = await response.json();
 
     //Return the first data (best match)
-    // console.log("Weather Info", data[0]);
+    //Return Weather Inforation Object
+    //console.log("Weather Info", data[0]);
     return data[0];
 };
 
