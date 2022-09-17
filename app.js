@@ -68,7 +68,7 @@ const updateUI = data => {
     `;
 
     //Update Weather Icon
-    const weatherIcon = `icons/${data.weatherInfo.WeatherIcon}.svg`;
+    const weatherIcon = `./icons/${data.weatherInfo.WeatherIcon}.svg`;
     icon.setAttribute('src', weatherIcon);
 
     if (card.classList.contains('d-none')) {
