@@ -4,7 +4,7 @@
 */
 
 
-const apiKey = "XXvZPsPGcbAOTCJlwAG0QBHnyNI1S2RO";
+const apiKey = "mVpaFzpCCwS0QDOL9dc8jJvUWqDs5zGd";
 
 // Async function to make a promise in order to fetch API city location key
 const cityLocation = async (city) => {
@@ -14,17 +14,16 @@ const cityLocation = async (city) => {
 
     const response = await fetch(apiEndpoint + query);
 
-    //API Request Error Checking
-    if (response.status !== 200) {
-        throw new Error('Cannot fetch the data');
-    }
-
     //Turn response JSON into a JavaScript object
     const data = await response.json();
 
-    //Return the first data (best match)
-    //Return City Inforation Object
-    //console.log("Location Key", data[0]);
+    //API Request Error Checking
+    if (response.status !== 200) {
+        throw new Error(data.Message);
+    }
+
+
+    //Return the first data City Inforation Object(best match)
     return data[0];
 };
 
@@ -50,13 +49,3 @@ const cityWeather = async (id) => {
     //console.log("Weather Info", data[0]);
     return data[0];
 };
-
-
-
-// // Test Accuweather API
-// cityLocation('chicago')
-//     .then(data => {
-//         return cityWeather(data.Key);
-//     }).then(data => {
-//         console.log(data);
-//     }).catch(err => console.log('Error:', err.message));

@@ -4,8 +4,20 @@
 */
 
 
+/* ================Function to Initiate API Requests================ */
+const getCity = async (city) => {
+    //Wait until API calls are finished
+    const cityInfo = await cityLocation(city);
+    const weatherInfo = await cityWeather(cityInfo.Key);
 
-/* ============== Get user input from Form text field ============== */
+    //Return the city info and weather info as objects within an object (Destructure)
+    return { cityInfo, weatherInfo };
+};
+
+
+
+
+/* ====== Get user input from Form text field and run Async code ====== */
 const userInput = document.querySelector('.user-input');
 userInput.addEventListener('submit', event => {
     //Prevent default refresh submit action
@@ -24,18 +36,6 @@ userInput.addEventListener('submit', event => {
         .catch(err => console.log("Error:", err));
 
 });
-
-//Initiate API requests
-const getCity = async (city) => {
-    //Wait until API calls are finished
-    const cityInfo = await cityLocation(city);
-    const weatherInfo = await cityWeather(cityInfo.Key);
-
-    //Return the city info and weather info as objects within an object
-    return { cityInfo, weatherInfo };
-};
-
-/* ================================================================= */
 
 
 
@@ -61,7 +61,7 @@ const updateUI = data => {
 
     displayedInfo.innerHTML =
         `
-        <h3 class="mt-3 mb-0">${cityName}, ${stateName}</h5>
+        <h3 class="mt-3 mb-0">${cityName}, ${stateName}</h3>
         <h5 class= "mt-0">${countryName}</h5>
         <h2 class="my-3">${weatherCondition}</h1>
         <h1 class="my-3">${temp}&deg;F</h2>
@@ -77,7 +77,7 @@ const updateUI = data => {
 
 }
 
-// Close Button Behavior
+/* ======================= Close Button Behavior ======================= */
 const clear = document.querySelector(".close-button");
 clear.addEventListener('click', event => {
 
@@ -86,5 +86,3 @@ clear.addEventListener('click', event => {
     }
 
 });
-
-/* ================================================================= */
